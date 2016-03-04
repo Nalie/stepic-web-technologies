@@ -1,4 +1,3 @@
-sudo cp -r /home/box/web/temp/application/* /home/box/web
 sudo mkdir /home/box/web/public
 sudo mkdir /home/box/web/public/img
 sudo mkdir /home/box/web/public/css
