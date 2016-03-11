@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 # Question - вопрос
 # title - заголовок вопроса
@@ -18,8 +19,8 @@ class Question(models.Model):
     likes = models.ManyToManyField(User, related_name='likes_set')
     def __unicode__(self):
         return self.title
-    def get_absolute_url(self):
-        return '/post/%d/' % self.pk
+    def get_url(self):
+        return '/question/%d/' % self.pk
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']

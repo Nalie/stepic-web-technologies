@@ -4,11 +4,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', 'qa.views.test'),
+    url(r'^$', 'qa.views.home'),
     url(r'^login/', 'qa.views.test'),
     url(r'^signup/', 'qa.views.test'),
-    url(r'^question/\d+/', 'qa.views.test'),
+    url(r'^question/(?P<pk>\d+)/$', 'qa.views.question'),
     url(r'^ask/', 'qa.views.test'),
-    url(r'^popular/', 'qa.views.test'),
+    url(r'^popular/', 'qa.views.popular'),
     url(r'^new/', 'qa.views.test'),
 ]
