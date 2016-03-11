@@ -1,3 +1,5 @@
+sudo /etc/init.d/mysql restart
+
 sudo mkdir /home/box/web/public/img
 sudo mkdir /home/box/web/public/css
 sudo mkdir /home/box/web/uploads
