@@ -20,7 +20,7 @@ def paginate(request, qs):
     try:
         page = int(request.GET.get('page', 1))
     except ValueError:
-        raise Http404
+        page = 1
     paginator = Paginator(qs, limit)
     try:
         page = paginator.page(page)
@@ -31,7 +31,7 @@ def paginate(request, qs):
 
 @require_GET
 def home(request):
-    page, paginator = paginate(request=request, qs=Question.objects.order_by('-added_at').all())  # Page
+    page, paginator = paginate(request=request, qs=Question.objects.order_by('-pk').all())  # Page
     paginator.baseurl = '/?page='
     return render(request, 'qa/home.html', {
         'questions': page.object_list,
