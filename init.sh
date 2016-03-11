@@ -15,3 +15,5 @@ cd ask
 sudo gunicorn --bind 0.0.0.0:8000 ask.wsgi:application &
 
 mysql -uroot -e "create database ask"
+mysqladmin -u root password pass
+./manage.py syncdb
