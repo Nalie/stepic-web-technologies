@@ -14,7 +14,7 @@ sudo ln -s /home/box/web/etc/gunicorn.conf   /etc/gunicorn.d/test
 cd /home/box/web
 sudo gunicorn -c /etc/gunicorn.d/test hello:app &
 cd ask
-sudo gunicorn --bind 0.0.0.0:8000 ask.wsgi:application &
+sudo gunicorn --bind 0.0.0.0:80 ask.wsgi:application &
 
 mysql -uroot -e "create database ask"
 mysqladmin -u root password pass
