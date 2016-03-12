@@ -2,13 +2,13 @@
 {% block title %}
     {{ block.super }} – главная
 {% endblock %}
-{% block content %}
-    {% for obj in questions %}
-        <div class="question">
-            <a href="{{ obj.get_url }}">{{ obj }}</a>
-        </div>
-    {% endfor %}
+{#{% block content %}#}
+{#    {% for obj in questions %}#}
+{#        <div class="question">#}
+{#            <a href="{{ obj.get_url }}">{{ obj }}</a>#}
+{#        </div>#}
+{#    {% endfor %}#}
 {#    <div class="paginator">#}
 {#        {% include "paginator.html" %}#}
 {#    </div>#}
-{% endblock %}
+{#{% endblock %}#}
