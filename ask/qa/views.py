@@ -4,6 +4,7 @@ from django.views.decorators.http import require_GET
 from django.core.paginator import Paginator, EmptyPage
 from django.http import Http404
 from models import Question
+from django.db.models import Count
 
 
 def test(request, *args, **kwargs):
@@ -42,7 +43,8 @@ def home(request):
 
 @require_GET
 def popular(request):
-    page, paginator = paginate(request=request, qs=Question.objects.all())  # Page
+    page, paginator = paginate(request=request, qs=Question.objects.annotate(likes_count=Count('likes')).order_by(
+        '-likes_count').all())  # Page
     paginator.baseurl = '/popular/?page='
     return render(request, 'qa/home.html', {
         'questions': page.object_list,
