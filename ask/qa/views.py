@@ -31,9 +31,9 @@ def paginate(request, qs):
 
 @require_GET
 def home(request):
-    return render(request, 'qa/home.html')#, {
-        # 'questions': Question.objects.order_by('-pk').all(),
-    # })
+    return render(request, 'qa/home.html', {
+        'questions': Question.objects.order_by('-pk').all(),
+    })
     # page, paginator = paginate(request=request, qs=Question.objects.order_by('-pk').all())  # Page
     # paginator.baseurl = '/?page='
     # return render(request, 'qa/home.html', {

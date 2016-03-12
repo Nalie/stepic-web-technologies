@@ -22,6 +22,12 @@
 </head>
 <body>
     <h1>Вопросы и ответы</h1>
-    {% block content %}{% endblock %}
+        {% block content %}
+    {% for obj in questions %}
+        <div class="question">
+            <a href="{{ obj.get_url }}">{{ obj }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}
 </body>
 </html>
