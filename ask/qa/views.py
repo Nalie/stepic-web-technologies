@@ -31,16 +31,13 @@ def paginate(request, qs):
 
 @require_GET
 def home(request):
+    page, paginator = paginate(request=request, qs=Question.objects.order_by('-pk').all())  # Page
+    paginator.baseurl = '/?page='
     return render(request, 'qa/home.html', {
-        'questions': Question.objects.order_by('-pk').all(),
+        'questions': page.object_list,
+        'paginator': paginator,
+        'page': page,
     })
-    # page, paginator = paginate(request=request, qs=Question.objects.order_by('-pk').all())  # Page
-    # paginator.baseurl = '/?page='
-    # return render(request, 'qa/home.html', {
-    #     'questions': page.object_list,
-    #     'paginator': paginator,
-    #     'page': page,
-    # })
 
 
 @require_GET
