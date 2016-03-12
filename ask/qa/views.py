@@ -42,7 +42,7 @@ def home(request):
 
 @require_GET
 def popular(request):
-    page, paginator = paginate(request=request, qs=Question.objects.order_by('-likes__count').all())  # Page
+    page, paginator = paginate(request=request, qs=Question.objects.all())  # Page
     paginator.baseurl = '/popular/?page='
     return render(request, 'qa/home.html', {
         'questions': page.object_list,
