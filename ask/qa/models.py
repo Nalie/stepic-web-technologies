@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+
 
 # Question - вопрос
 # title - заголовок вопроса
@@ -17,13 +17,17 @@ class Question(models.Model):
     rating = models.IntegerField(null=False, default=0)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='questions_set')
     likes = models.ManyToManyField(User, related_name='likes_set')
+
     def __unicode__(self):
         return self.title
+
     def get_url(self):
         return '/question/%d/' % self.pk
+
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']
+
 
 # Answer - ответ
 # text - текст ответа
@@ -35,10 +39,13 @@ class Answer(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
     def __unicode__(self):
         return self.text
-    def get_absolute_url(self):
-        return '/post/%d/' % self.pk
+
+    def get_url(self):
+        return '/question/%d/' % self.question_id
+
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']

@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.core.paginator import Paginator, EmptyPage
-from django.http import Http404
 from models import Question
+from forms import AskForm, AnswerForm
 from django.db.models import Count
 
 
@@ -53,9 +53,40 @@ def popular(request):
     })
 
 
-@require_GET
 def question(request, pk):
+    if request.method is 'POST':
+        return answer(request)
     question = get_object_or_404(Question, pk=pk)
+    form = AnswerForm(initial={'question': pk})
     return render(request, 'qa/question.html', {
         'question': question,
+        'form': form,
+    })
+
+
+def ask(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+    if form.is_valid():
+        question = form.save()
+        url = question.get_url()
+        return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', {
+        'form': form,
+    })
+
+
+@require_POST
+def answer(request):
+    form = AnswerForm(request.POST)
+    question = get_object_or_404(Question, pk=form.question_id)
+    if form.is_valid():
+        answer = form.save()
+        url = answer.get_url()
+        return HttpResponseRedirect(url)
+    return render(request, 'qa/question.html', {
+        'question': question,
+        'form': form,
     })
