@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "qa/layout.html" %}
 {% block title %}
     {{ block.super }} – главная
 {% endblock %}
@@ -8,26 +8,7 @@
             <a href="{{ obj.get_url }}">{{ obj }}</a>
         </div>
     {% endfor %}
-{#    <div class="paginator">#}
-{#        {% include "paginator.html" %}#}
-{#    </div>#}
+    <div class="paginator">
+        {% include "qa/paginator.html" %}
+    </div>
 {% endblock %}
-{##}
-{##}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>{% block title %}Q&A{% endblock %}</title>#}
-{#</head>#}
-{#<body>#}
-{#    <h1>Вопросы и ответы</h1>#}
-{#        {% block content %}#}
-{#    {% for obj in questions %}#}
-{#        <div class="question">#}
-{#            <a href="{{ obj.get_url }}">{{ obj }}</a>#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#{% endblock %}#}
-{#</body>#}
-{#</html>#}
