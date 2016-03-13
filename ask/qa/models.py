@@ -49,3 +49,15 @@ class Answer(models.Model):
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']
+
+
+class User(models.Model):
+    login = models.CharField(unique=True)
+    password = models.CharField()
+    email = models.EmailField()
+
+
+class Session(models.Model):
+    key = models.CharField(unique=True)
+    user = models.ForeignKey(User)
+    expires = models.DateTimeField()

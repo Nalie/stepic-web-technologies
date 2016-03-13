@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from django.core.paginator import Paginator, EmptyPage
 from models import Question
-from forms import AskForm, AnswerForm
+from forms import AskForm, AnswerForm, SignupForm, LoginForm
+from utils import do_login
 from django.db.models import Count
 
 
@@ -68,6 +69,7 @@ def ask(request):
     if request.method == "POST":
         form = AskForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             question = form.save()
             url = question.get_url()
             return HttpResponseRedirect(url)
@@ -83,6 +85,7 @@ def answer(request):
     form = AnswerForm(request.POST)
     question = get_object_or_404(Question, pk=form.question_id)
     if form.is_valid():
+        form._user = request.user
         answer = form.save()
         url = answer.get_url()
         return HttpResponseRedirect(url)
@@ -90,3 +93,34 @@ def answer(request):
         'question': question,
         'form': form,
     })
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return login(request)
+    else:
+        form = SignupForm()
+    return render(request, 'qa/signup.html', {
+        'form': form,
+    })
+
+
+def login(request):
+    error = ''
+    if request.method == 'POST':
+        form = LoginForm(request)
+        if form.is_valid():
+            url = request.POST.get('continue', '/')
+            session = do_login(form.cleaned_data['login'], form.cleaned_data['password'])
+            if session is not None:
+                response = HttpResponseRedirect(url)
+                response.set_cookie('sessid', session.key, httponly=True,
+                                expires=session.expires,
+                                )
+                return response
+        else:
+            error = u'Неверный логин / пароль'
+    return render(request, 'qa/login.html', {'error': error, 'form': form})

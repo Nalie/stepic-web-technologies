@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from models import Question, Answer
+from models import Question, Answer, User
 
 
 # AskForm - форма добавления вопроса
@@ -16,6 +16,7 @@ class AskForm(forms.Form):
 
     def save(self):
         question = Question(**self.cleaned_data)
+        question.author = self._user
         question.save()
         return question
 
@@ -31,5 +32,24 @@ class AnswerForm(forms.Form):
 
     def save(self):
         answer = Answer(**self.cleaned_data)
+        answer.author = self._user
         answer.save()
         return answer
+
+
+class SignupForm(forms.Form):
+    login = forms.CharField(label='Логин', required=True)
+    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
+    email = forms.EmailField(label='E-mail')
+
+    def save(self):
+        from utils import make_password
+        user = User(**self.cleaned_data)
+        user.password = make_password(user.password)
+        user.save()
+        return user
+
+
+class LoginForm(forms.Form):
+    login = forms.CharField(label='Логин', required=True)
+    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
