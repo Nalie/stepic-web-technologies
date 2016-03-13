@@ -52,12 +52,12 @@ class Answer(models.Model):
 
 
 class User(models.Model):
-    login = models.CharField(unique=True)
-    password = models.CharField()
+    login = models.CharField(unique=True, max_length=255)
+    password = models.CharField(max_length=255)
     email = models.EmailField()
 
 
 class Session(models.Model):
-    key = models.CharField(unique=True)
+    key = models.CharField(unique=True, max_length=255)
     user = models.ForeignKey(User)
     expires = models.DateTimeField()
