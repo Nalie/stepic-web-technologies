@@ -123,4 +123,6 @@ def login(request):
                 return response
         else:
             error = u'Неверный логин / пароль'
+    else:
+        form = LoginForm()
     return render(request, 'qa/login.html', {'error': error, 'form': form})

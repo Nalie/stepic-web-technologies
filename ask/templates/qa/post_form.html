@@ -1,0 +1,33 @@
+{% extends "qa/layout.html" %}
+{% block title %}
+    {{ block.super }} – вопрос
+{% endblock %}
+{% block content %}
+    <h1>{{ question.title }}</h1>
+    <div id="text">{{ question.text }}</div>
+    {% for answer in question.answer_set.all %}
+        <div id="answer">{{ answer.text }}</div>
+    {% endfor %}
+
+    {#    Answer form #}
+    {% for e in form.non_field_errors %}
+        <div class="alert alert-danger">{{ e }}</div>
+    {% endfor %}
+    <form class="form-horizontal" method="post" action={% block post_url %}{% endblock %}>
+        {% csrf_token %}
+        <fieldset>
+            {% for field in form %}
+                <div class="control-group
+{% if field.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ field.label }}</label>
+                    <div class="controls">{{ field }}</div>
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Сохранить
+            </button>
+        </div>
+    </form>
+{% endblock %}
