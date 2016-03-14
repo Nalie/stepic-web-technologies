@@ -13,7 +13,7 @@
     {% for e in form.non_field_errors %}
         <div class="alert alert-danger">{{ e }}</div>
     {% endfor %}
-    <form class="form-horizontal" method="post" action={% block post_url %}{% endblock %}>
+    <form class="form-horizontal" method="post" action="{% block post_url %}{% endblock %}">
         {% csrf_token %}
         <fieldset>
             {% for field in form %}
