@@ -2,6 +2,18 @@
 from django.db import models
 
 
+class User(models.Model):
+    login = models.CharField(unique=True, max_length=255)
+    password = models.CharField(max_length=255)
+    email = models.EmailField()
+
+
+class Session(models.Model):
+    key = models.CharField(unique=True, max_length=255)
+    user = models.ForeignKey(User)
+    expires = models.DateTimeField()
+
+
 # Question - вопрос
 # title - заголовок вопроса
 # text - полный текст вопроса
@@ -48,15 +60,3 @@ class Answer(models.Model):
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']
-
-
-class User(models.Model):
-    login = models.CharField(unique=True, max_length=255)
-    password = models.CharField(max_length=255)
-    email = models.EmailField()
-
-
-class Session(models.Model):
-    key = models.CharField(unique=True, max_length=255)
-    user = models.ForeignKey(User)
-    expires = models.DateTimeField()
