@@ -102,7 +102,7 @@ def signup(request):
             form.save()
             return login(request)
     else:
-        form = SignupForm()
+        form = AskForm()
     return render(request, 'qa/signup.html', {
         'form': form,
     })
