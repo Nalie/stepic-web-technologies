@@ -1,2 +1,17 @@
 {% extends "qa/post_form.html" %}
-{% block post_url %}/qa/answer/{% endblock %}>
+{% block title %}
+    {{ block.super }} – вопрос
+{% endblock %}
+{% block content %}
+    <h1>{{ question.title }}</h1>
+    <div id="text">{{ question.text }}</div>
+    {% for answer in question.answer_set.all %}
+        <div id="answer">{{ answer.text }}</div>
+    {% endfor %}
+
+    {{ block.super }}
+{% endblock %}
+{% block post_url %}/qa/answer/{% endblock %}
+{% block btn_name %}
+Сохранить
+{% endblock %}
