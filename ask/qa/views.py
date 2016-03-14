@@ -96,16 +96,17 @@ def answer(request):
 
 
 def signup(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return login(request)
-    else:
-        form = AskForm()
-    return render(request, 'qa/signup.html', {
-        'form': form,
-    })
+    return render(request, 'qa/test.html')
+    # if request.method == 'POST':
+    #     form = SignupForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return login(request)
+    # else:
+    #     form = SignupForm()
+    # return render(request, 'qa/signup.html', {
+    #     'form': form,
+    # })
 
 
 def login(request):
