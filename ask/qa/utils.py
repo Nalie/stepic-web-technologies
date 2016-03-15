@@ -32,7 +32,10 @@ def do_login(login, password):
         return None
     if not check_password(password, user.password):
         return None
-    session = Session(key=generate_session_id(), user=user, expires=datetime.now() + timedelta(days=5))
+    print 'session start created'
+    key = generate_session_id()
+    print key
+    session = Session(key=key, user=user, expires=datetime.now() + timedelta(days=5))
     print session
     session.save()
     print session
