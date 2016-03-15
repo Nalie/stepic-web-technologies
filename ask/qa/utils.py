@@ -15,7 +15,11 @@ def make_password(raw_password):
 
 def check_password(raw_password, enc_password):
     salt, hsh = enc_password.split('$')
-    return enc_password == get_hexdigest(salt, raw_password)
+    print raw_password
+    print enc_password
+    print hsh
+    print get_hexdigest(salt, raw_password)
+    return hsh == get_hexdigest(salt, raw_password)
 
 
 def generate_session_id():
