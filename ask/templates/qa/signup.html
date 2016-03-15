@@ -1,31 +1,5 @@
-{#{% extends "qa/post_form.html" %}#}
-{#{% block post_url %}/qa/signup/{% endblock %}#}
-{#{% block btn_name %}#}
-{#Зарегистрироваться#}
-{#{% endblock %}#}
-{##}
-
-{% extends "qa/layout.html" %}
-{% block content %}
-    {#    Answer form #}
-    {% for e in form.non_field_errors %}
-        <div class="alert alert-danger">{{ e }}</div>
-    {% endfor %}
-    <form class="form-horizontal" method="post" action="/qa/signup/">
-        {% csrf_token %}
-        <fieldset>
-            {% for field in form %}
-                <div class="control-group
-{% if field.errors %}has-error{% endif %}">
-                    <label class="control-label">{{ field.label }}</label>
-                    <div class="controls">{{ field }}</div>
-                </div>
-            {% endfor %}
-        </fieldset>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">
-                Зарегистрироваться
-            </button>
-        </div>
-    </form>
+{% extends "qa/post_form.html" %}
+{% block post_url %}/qa/signup/{% endblock %}
+{% block btn_name %}
+Зарегистрироваться
 {% endblock %}

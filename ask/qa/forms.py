@@ -28,6 +28,8 @@ class AnswerForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea, label='Ответ')
     question = forms.IntegerField()
 
+    def get_url(self):
+        return '/qa/answer/'
     # def clean(self):
 
     def save(self):
@@ -42,6 +44,9 @@ class SignupForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
     email = forms.EmailField(label='E-mail')
 
+    def get_url(self):
+        return '/qa/signup/'
+
     def save(self):
         from utils import make_password
         user = User(**self.cleaned_data)
@@ -53,3 +58,6 @@ class SignupForm(forms.Form):
 class LoginForm(forms.Form):
     login = forms.CharField(label='Логин', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
+
+    def get_url(self):
+        return '/qa/login/'
