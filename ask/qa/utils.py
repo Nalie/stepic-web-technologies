@@ -20,6 +20,7 @@ def check_password(raw_password, enc_password):
 
 def generate_session_id():
     import uuid
+    print 'generate ses id'
     return uuid.uuid1()
 
 
@@ -31,11 +32,7 @@ def do_login(login, password):
         return None
     if not check_password(password, user.password):
         return None
-    session = Session()
-    print session
-    session.key = generate_session_id()
-    session.user = user
-    session.expires = datetime.now() + timedelta(days=5)
+    session = Session(key=generate_session_id(), user=user, expires=datetime.now() + timedelta(days=5))
     print session
     session.save()
     print session
