@@ -111,10 +111,14 @@ def signup(request):
 
 def login(request):
     error = ''
+    print request.method
     if request.method == 'POST':
         form = LoginForm(request)
+        print form
         if form.is_valid():
+            print 'valid'
             url = request.POST.get('continue', '/')
+            print url
             session = do_login(form.cleaned_data['login'], form.cleaned_data['password'])
             if session is not None:
                 response = HttpResponseRedirect(url)

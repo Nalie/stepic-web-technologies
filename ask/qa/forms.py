@@ -50,14 +50,10 @@ class SignupForm(forms.Form):
         return '/qa/signup/'
 
     def save(self):
-        print 'saving signup form'
         from utils import make_password
         user = User(**self.cleaned_data)
-        print user
         user.password = make_password(user.password)
-        print user
         user.save()
-        print user
         return user
 
 
@@ -67,3 +63,6 @@ class LoginForm(forms.Form):
 
     def get_url(self):
         return '/qa/login/'
+
+    def __unicode__(self):
+        return self.cleaned_data + "  " + self._user
