@@ -3,6 +3,7 @@ sudo chown -R www-data /home/box/web
 
 mysql -uroot -e "create database ask"
 mysqladmin -u root password pass
+cd /home/box/web/ask
 ./manage.py syncdb
 
 sudo /etc/init.d/nginx stop

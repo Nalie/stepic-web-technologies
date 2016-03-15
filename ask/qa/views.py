@@ -101,7 +101,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            print 'do login'
+            print form.cleaned_data['username'] + ' ' + form.cleaned_data['password']
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             print session
             if session is not None:
