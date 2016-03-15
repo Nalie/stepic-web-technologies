@@ -104,7 +104,7 @@ def signup(request):
             return login(request)
     else:
         form = SignupForm()
-    return render(request, 'qa/signup.html', {
+    return render(request, 'qa/post_form.html', {
         'form': form,
     })
 
