@@ -40,7 +40,7 @@ class AnswerForm(forms.Form):
 
 
 class SignupForm(forms.Form):
-    login = forms.CharField(label='Логин', required=True)
+    username = forms.CharField(label='Логин', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
     email = forms.EmailField(label='E-mail')
 
@@ -56,7 +56,7 @@ class SignupForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    login = forms.CharField(label='Логин', required=True)
+    username = forms.CharField(label='Логин', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
 
     def get_url(self):
