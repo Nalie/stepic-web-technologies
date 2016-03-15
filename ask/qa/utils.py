@@ -14,7 +14,10 @@ def make_password(raw_password):
 
 
 def check_password(raw_password, enc_password):
+    print raw_password
+    print enc_password
     salt, hsh = enc_password.split('$')
+    print get_hexdigest(salt, raw_password)
     return hsh == get_hexdigest(salt, raw_password)
 
 
@@ -27,11 +30,10 @@ def do_login(login, password):
     from models import User, Session
     try:
         user = User.objects.get(username=login)
-        print user
     except User.DoesNotExist:
-        print 'none'
         return None
     if not check_password(password, user.password):
+        print 'none'
         return None
     session = Session()
     session.key = generate_session_id()
