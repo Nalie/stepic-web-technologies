@@ -101,8 +101,13 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            request.path = "/login/"
-            return login(request)
+            session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
+            if session is not None:
+                response = HttpResponseRedirect('/')
+                response.set_cookie('sessid', session.key, httponly=True,
+                                expires=session.expires,
+                                )
+                return response
     else:
         form = SignupForm()
     return render(request, 'qa/signup.html', {
@@ -113,14 +118,10 @@ def signup(request):
 def login(request):
     error = ''
     if request.method == 'POST':
-        print request
         form = LoginForm(request)
-        print form
         if form.is_valid():
-            print 'valid'
             url = request.POST.get('continue', '/')
-            print url
-            session = do_login(form.cleaned_data['login'], form.cleaned_data['password'])
+            session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             if session is not None:
                 response = HttpResponseRedirect(url)
                 response.set_cookie('sessid', session.key, httponly=True,
