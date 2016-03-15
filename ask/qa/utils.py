@@ -15,16 +15,11 @@ def make_password(raw_password):
 
 def check_password(raw_password, enc_password):
     salt, hsh = enc_password.split('$')
-    print raw_password
-    print enc_password
-    print hsh
-    print get_hexdigest(salt, raw_password)
     return hsh == get_hexdigest(salt, raw_password)
 
 
 def generate_session_id():
     import uuid
-    print 'generate ses id'
     return uuid.uuid1()
 
 
@@ -38,9 +33,10 @@ def do_login(login, password):
         return None
     print 'session start created'
     key = generate_session_id()
-    print key
-    session = Session(key=key, user=user, expires=datetime.now() + timedelta(days=5))
+    session = Session(key=key, expires=datetime.now() + timedelta(days=5))
     print session
+    print user
+    session.user = user
     session.save()
     print session
     return session
