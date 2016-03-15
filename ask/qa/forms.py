@@ -12,6 +12,8 @@ class AskForm(forms.Form):
     title = forms.CharField(max_length=100)
     text = forms.CharField(widget=forms.Textarea)
 
+    def get_url(self):
+        return '/qa/ask/'
     # def clean(self):
 
     def save(self):

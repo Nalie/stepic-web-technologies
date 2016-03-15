@@ -97,6 +97,7 @@ def answer(request):
 
 
 def signup(request):
+    print('signup')
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
