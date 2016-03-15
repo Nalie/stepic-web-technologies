@@ -27,6 +27,7 @@ def do_login(login, password):
     from models import User, Session
     try:
         user = User.objects.get(login=login)
+        print user
     except User.DoesNotExist:
         return None
     if not check_password(password, user.password):
@@ -35,5 +36,6 @@ def do_login(login, password):
     session.key = generate_session_id()
     session.user = user
     session.expires = datetime.now() + timedelta(days=5)
+    print session
     session.save()
     return session

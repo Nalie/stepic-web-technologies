@@ -16,6 +16,9 @@ class Session(models.Model):
     user = models.ForeignKey(User)
     expires = models.DateTimeField()
 
+    def __unicode__(self):
+        return self.key + '  ' + self.user + ' ' + self.expires
+
 
 # Question - вопрос
 # title - заголовок вопроса
