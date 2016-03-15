@@ -24,10 +24,9 @@ def generate_session_id():
 
 
 def do_login(login, password):
-    print 'inside do login'
     from models import User, Session
     try:
-        user = User.objects.get(login=login)
+        user = User.objects.get(username=login)
         print user
     except User.DoesNotExist:
         print 'none'
