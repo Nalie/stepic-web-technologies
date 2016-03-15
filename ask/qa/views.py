@@ -101,6 +101,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            request.path = "/login/"
             return login(request)
     else:
         form = SignupForm()
