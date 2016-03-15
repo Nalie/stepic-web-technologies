@@ -111,8 +111,8 @@ def signup(request):
 
 def login(request):
     error = ''
-    print request.method
     if request.method == 'POST':
+        print request
         form = LoginForm(request)
         print form
         if form.is_valid():
