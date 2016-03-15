@@ -7,6 +7,9 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     email = models.EmailField()
 
+    def __unicode__(self):
+        return self.username + self.email + self.password
+
 
 class Session(models.Model):
     key = models.CharField(unique=True, max_length=255)
