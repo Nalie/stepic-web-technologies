@@ -14,11 +14,8 @@ def make_password(raw_password):
 
 
 def check_password(raw_password, enc_password):
-    print raw_password
-    print enc_password
     salt, hsh = enc_password.split('$')
-    print get_hexdigest(salt, raw_password)
-    return hsh == get_hexdigest(salt, raw_password)
+    return enc_password == get_hexdigest(salt, raw_password)
 
 
 def generate_session_id():
@@ -33,12 +30,10 @@ def do_login(login, password):
     except User.DoesNotExist:
         return None
     if not check_password(password, user.password):
-        print 'none'
         return None
     session = Session()
     session.key = generate_session_id()
     session.user = user
     session.expires = datetime.now() + timedelta(days=5)
-    print session
     session.save()
     return session
