@@ -108,7 +108,6 @@ def signup(request):
                 response.set_cookie(key='sessid', value=session.key,
                                 expires=session.expires,
                                 )
-                print response.get_cookie('sessid')
                 print session.key
                 return response
     else:
