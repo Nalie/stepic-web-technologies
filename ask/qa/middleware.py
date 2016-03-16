@@ -8,7 +8,6 @@ class CheckSessionMiddleware(object):
     def process_request(self, request):
         print 'process_request'
         print request.method
-        print request.COOKIE.get('sessid')
         try:
             sessid = request.COOKIE.get('sessid')
             print sessid
@@ -23,3 +22,4 @@ class CheckSessionMiddleware(object):
             print 'session doesnt exist'
             request.session = None
             request.user = None
+        return request
