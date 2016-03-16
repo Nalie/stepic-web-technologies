@@ -11,10 +11,8 @@ class CheckSessionMiddleware(object):
         print request.get_full_path()
         print request
         print request.get_signed_cookie('sessid', 'ttt')
-        print request.cookies
-        print request.cookies.get('sessid')
         try:
-            sessid = request.COOKIE.get('sessid')
+            sessid = request.get_signed_cookie('sessid')
             print sessid
             session = Session.objects.get(
                 key=sessid,
