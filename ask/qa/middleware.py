@@ -19,7 +19,7 @@ class CheckSessionMiddleware(object):
             request.session = None
             request.user = None
 
-    def process_response(self, request, response):
+    def process_response(request, response):
         try:
             print 'response: ' + response
             print 'response.cookies: ' + response.cookies
