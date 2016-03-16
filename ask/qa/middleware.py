@@ -6,7 +6,6 @@ from models import Session
 class CheckSessionMiddleware(object):
 
     def process_request(self, request):
-        print request
         try:
             sessid = request.get_signed_cookie('sessid', '')
             session = Session.objects.get(
@@ -15,8 +14,8 @@ class CheckSessionMiddleware(object):
             )
             request.session = session
             request.user = session.user
+            print request
+            print session
         except Session.DoesNotExist:
-            print 'session doesnt exist'
             request.session = None
             request.user = None
-        print 'hz'
