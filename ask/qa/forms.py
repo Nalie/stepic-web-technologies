@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.models import User
 from django import forms
-from models import Question, Answer, User
+from models import Question, Answer
 
 
 # AskForm - форма добавления вопроса

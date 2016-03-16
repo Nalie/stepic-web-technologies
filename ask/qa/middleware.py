@@ -1,6 +1,6 @@
 from django.utils import timezone
-
-from models import Session
+from django.contrib.sessions.models import Session
+# from models import Session
 
 
 class CheckSessionMiddleware(object):
