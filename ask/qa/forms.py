@@ -51,11 +51,10 @@ class SignupForm(forms.Form):
         return '/qa/signup/'
 
     def save(self):
-        from utils import make_password
-
+        # from utils import make_password
         user = User.objects.create_user(self.cleaned_data['username'],
                                  self.cleaned_data['email'],
-                                 self.cleaned_data['username']
+                                 self.cleaned_data['password']
                                  # make_password(self.cleaned_data['username'])
                                  )
         # user = User(**self.cleaned_data)
