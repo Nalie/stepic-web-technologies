@@ -6,13 +6,10 @@ from models import Session
 class CheckSessionMiddleware(object):
 
     def process_request(self, request):
-        print 'process_request'
-        print request.method
-        print request.get_full_path()
         print request
         print request.get_signed_cookie('sessid', 'ttt')
         try:
-            sessid = request.get_signed_cookie('sessid')
+            sessid = request.get_signed_cookie('sessid', '')
             print sessid
             session = Session.objects.get(
                 key=sessid,
