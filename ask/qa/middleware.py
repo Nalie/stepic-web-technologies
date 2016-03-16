@@ -20,9 +20,17 @@ class CheckSessionMiddleware(object):
             request.user = None
 
     def process_response(self, request, response):
+        print 'process responce'
         try:
-            print 'response: ' + response
-            print 'response.cookies: ' + response.cookies
+            if response is not None:
+                print 'response: ' + response
+                print 'response.cookies: ' + response.cookies
+            else:
+                print 'response is none'
+            if request is not None:
+                print request
+            else:
+                print 'request is none'
         except Exception:
             print 'hz'
         finally:
