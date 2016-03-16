@@ -22,4 +22,3 @@ class CheckSessionMiddleware(object):
     def process_response(self, request, response):
         print 'request: ' + request
         print 'response.cookies: ' + response.cookies
-        return response
