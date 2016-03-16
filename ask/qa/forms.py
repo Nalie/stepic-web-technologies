@@ -59,7 +59,7 @@ class SignupForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Логин', required=True)
-    password = forms.CharField(widget=forms.PasswordInput, label='Пароль', required=True)
+    password = forms.CharField(label='Пароль', required=True)
 
     def get_url(self):
         return '/qa/login/'
