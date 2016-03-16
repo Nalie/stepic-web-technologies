@@ -8,6 +8,8 @@ class CheckSessionMiddleware(object):
     def process_request(self, request):
         print 'process_request'
         print request.method
+        print request.cookies
+        print request.cookies.get('sessid')
         try:
             sessid = request.COOKIE.get('sessid')
             print sessid
