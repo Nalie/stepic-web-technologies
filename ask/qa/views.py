@@ -120,9 +120,13 @@ def login(request):
     if request.method == 'POST':
         print 'login post'
         form = LoginForm(request)
+        print '1'
         if form.is_valid():
+            print '2'
             url = request.POST.get('continue', '/')
+            print '3'
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
+            print '4'
             if session is not None:
                 print session
                 response = HttpResponseRedirect(url)
