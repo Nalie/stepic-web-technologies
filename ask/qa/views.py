@@ -97,7 +97,6 @@ def answer(request):
 
 
 def signup(request):
-    print 'signup'
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -119,13 +118,15 @@ def signup(request):
 def login(request):
     error = ''
     if request.method == 'POST':
+        print 'login post'
         form = LoginForm(request)
         if form.is_valid():
             url = request.POST.get('continue', '/')
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             if session is not None:
+                print session
                 response = HttpResponseRedirect(url)
-                response.set_cookie('sessionid', session.key,
+                response.set_cookie('sessionid', session.key, httponly=True,
                                 expires=session.expires
                                 )
                 return response
