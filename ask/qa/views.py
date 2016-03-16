@@ -105,11 +105,11 @@ def signup(request):
             print 'session created'
             if session is not None:
                 print session.key
+                print session.expires
                 response = HttpResponseRedirect('/')
                 response.set_cookie('sessid', session.key, httponly=True,
                                 expires=session.expires,
                                 )
-                print response.COOKIES.get('sessid')
                 return response
     else:
         form = SignupForm()
