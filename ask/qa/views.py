@@ -106,13 +106,13 @@ def signup(request):
             print 'session created'
             if session is not None:
                 response = HttpResponseRedirect('/')
-                response.set_cookie('sessid', session.key,
+                response.set_cookie(key='sessid', value=session.key,
                                 expires=session.expires,
                                 )
+                print session.key
                 return response
     else:
         form = SignupForm()
-        print 'get'
     return render(request, 'qa/signup.html', {
         'form': form,
     })
