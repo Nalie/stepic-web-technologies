@@ -119,7 +119,7 @@ def login(request):
     error = ''
     if request.method == 'POST':
         print 'login post'
-        form = LoginForm(request)
+        form = LoginForm(request.POST)
         print '1'
         if form.is_valid():
             print '2'
