@@ -122,7 +122,6 @@ def login(request):
         if form.is_valid():
             url = request.POST.get('continue', '/')
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            print '4'
             if session is not None:
                 response = HttpResponseRedirect(url)
                 response.set_cookie('sessionid', session.key, httponly=True,
