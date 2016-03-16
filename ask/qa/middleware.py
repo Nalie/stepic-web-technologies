@@ -4,7 +4,8 @@ from models import Session
 
 
 class CheckSessionMiddleware(object):
-    def process_request(request):
+
+    def process_request(self, request):
         print 'process_request'
         try:
             sessid = request.COOKIE.get('sessid')
