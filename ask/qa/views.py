@@ -108,8 +108,8 @@ def signup(request):
                 response.set_cookie('session', session.key, httponly=True,
                                 expires=session.expires
                                 )
-                print response
-                print response.cookies
+                # print response
+                # print response.cookies
                 return response
     else:
         form = SignupForm()
