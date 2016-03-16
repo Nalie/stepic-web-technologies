@@ -97,6 +97,7 @@ def answer(request):
 
 
 def signup(request):
+    print request.method
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -113,6 +114,7 @@ def signup(request):
                 return response
     else:
         form = SignupForm()
+        print 'get'
     return render(request, 'qa/signup.html', {
         'form': form,
     })
