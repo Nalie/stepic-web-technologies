@@ -33,12 +33,9 @@ def do_login(login, password):
     if not check_password(password, user.password):
         return None
     key = generate_session_id()
-    print 'session start created'
-    exp = timezone.now() + timedelta(days=5)
-    print exp
-    print user
-    print key
+    print 'session create start'
     session = Session.objects.create(key=key, expires=timezone.now() + timedelta(days=5), user=user)
+    print 'session create completed'
     # session = Session(key=key, expires=datetime.now() + timedelta(days=5))
     # print session
     # print user
