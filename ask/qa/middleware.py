@@ -18,3 +18,8 @@ class CheckSessionMiddleware(object):
         except Session.DoesNotExist:
             request.session = None
             request.user = None
+
+    def process_response(self, request, response):
+        print 'request: ' + request
+        print 'response.cookies: ' + response.cookies
+        return response
