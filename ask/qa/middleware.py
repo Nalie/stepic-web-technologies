@@ -7,7 +7,7 @@ class CheckSessionMiddleware(object):
 
     def process_request(self, request):
         try:
-            sessid = request.COOKIES.get('sessionId')
+            sessid = request.COOKIES.get('session')
             if sessid is not None:
                 session = Session.objects.get(
                     key=sessid,
