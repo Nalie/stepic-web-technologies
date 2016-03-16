@@ -41,5 +41,4 @@ def do_login(login, password):
     # print user
     # session.user = user
     # session.save()
-    print session
     return session

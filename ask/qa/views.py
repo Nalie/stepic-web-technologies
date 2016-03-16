@@ -102,7 +102,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            print session
+            print 'session created'
             if session is not None:
                 response = HttpResponseRedirect('/')
                 response.set_cookie('sessid', session.key, httponly=True,
