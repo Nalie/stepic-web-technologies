@@ -4,7 +4,6 @@ from models import Session
 
 
 class CheckSessionMiddleware(object):
-
     def process_request(self, request):
         try:
             sessid = request.COOKIES.get('session')
@@ -20,7 +19,7 @@ class CheckSessionMiddleware(object):
             request.user = None
 
     def process_response(self, request, response):
-        print 'process responce'
+        print 'process response'
         try:
             if response is not None:
                 print 'response: ' + response
