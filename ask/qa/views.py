@@ -109,6 +109,7 @@ def signup(request):
                                 expires=session.expires,
                                 )
                 print session.key
+                print response
                 return response
     else:
         form = SignupForm()
