@@ -95,19 +95,25 @@ def answer(request):
         'form': form,
     })
 
+from django.contrib.auth import authenticate, login
 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            if session is not None:
-                response = HttpResponseRedirect('/')
-                response.set_cookie('sessionid', session.key, httponly=True,
-                                expires=session.expires
-                                )
-                return response
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user is not None:
+            # the password verified for the user
+                if user.is_active:
+                    login(request, user)
+            # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
+            # if session is not None:
+                    response = HttpResponseRedirect('/')
+                # response.set_cookie('sessionid', session.key, httponly=True,
+                #                 expires=session.expires
+                #                 )
+                    return response
     else:
         form = SignupForm()
     return render(request, 'qa/signup.html', {
@@ -121,15 +127,20 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             url = request.POST.get('continue', '/')
-            session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            if session is not None:
-                response = HttpResponseRedirect(url)
-                response.set_cookie('sessionid', session.key, httponly=True,
-                                expires=session.expires
-                                )
-                return response
-        else:
-            error = u'Неверный логин / пароль'
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user is not None:
+            # the password verified for the user
+                if user.is_active:
+                    login(request, user)
+            # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
+            # if session is not None:
+                    response = HttpResponseRedirect(url)
+                # response.set_cookie('sessionid', session.key, httponly=True,
+                #                 expires=session.expires
+                                # )
+                    return response
+            else:
+                error = u'Неверный логин / пароль'
     else:
         form = LoginForm()
     return render(request, 'qa/login.html', {'error': error, 'form': form})

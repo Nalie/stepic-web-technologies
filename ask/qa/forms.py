@@ -52,9 +52,15 @@ class SignupForm(forms.Form):
 
     def save(self):
         from utils import make_password
-        user = User(**self.cleaned_data)
-        user.password = make_password(user.password)
-        user.save()
+
+        user = User.objects.create_user(self.cleaned_data['username'],
+                                 self.cleaned_data['email'],
+                                 self.cleaned_data['username']
+                                 # make_password(self.cleaned_data['username'])
+                                 )
+        # user = User(**self.cleaned_data)
+        # user.password = make_password(user.password)
+        # user.save()
         return user
 
 

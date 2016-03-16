@@ -25,13 +25,22 @@ def generate_session_id():
 
 
 def do_login(login, password):
-    from models import User, Session
-    try:
-        user = User.objects.get(username=login)
-    except User.DoesNotExist:
-        return None
-    if not check_password(password, user.password):
-        return None
-    key = generate_session_id()
-    session = Session.objects.create(key=key, expires=timezone.now() + timedelta(days=5), user=user)
-    return session
+    # from models import User, Session
+    from django.contrib.auth.models import User
+    from django.contrib.sessions.models import Session
+    from django.contrib.auth import authenticate
+    user = authenticate(username=login, password=password)
+    if user is not None:
+    # the password verified for the user
+        if user.is_active:
+            return True
+    return False
+    # try:
+    #     user = User.objects.get(username=login)
+    # except User.DoesNotExist:
+    #     return None
+    # if not check_password(password, user.password):
+    #     return None
+    # key = generate_session_id()
+    # session = Session.objects.create(key=key, expires=timezone.now() + timedelta(days=5), user=user)
+    # return session
