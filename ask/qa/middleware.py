@@ -22,6 +22,5 @@ class CheckSessionMiddleware(object):
             print 'session doesnt exist'
             request.session = None
             request.user = None
-        except Exception:
-            print 'hz'
+        print 'hz'
         return request
