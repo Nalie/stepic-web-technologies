@@ -1,4 +1,5 @@
-from datetime import timedelta, datetime
+from datetime import timedelta
+from django.utils import timezone
 
 
 def get_hexdigest(salt, password):
@@ -33,7 +34,7 @@ def do_login(login, password):
         return None
     key = generate_session_id()
     print 'session start created'
-    session = Session.objects.create(key=key, expires=datetime.now() + timedelta(days=5), user=user)
+    session = Session.objects.create(key=key, expires=timezone.now() + timedelta(days=5), user=user)
     # session = Session(key=key, expires=datetime.now() + timedelta(days=5))
     # print session
     # print user
