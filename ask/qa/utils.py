@@ -31,12 +31,13 @@ def do_login(login, password):
         return None
     if not check_password(password, user.password):
         return None
-    print 'session start created'
     key = generate_session_id()
-    session = Session(key=key, expires=datetime.now() + timedelta(days=5))
-    print session
-    print user
-    session.user = user
-    session.save()
+    print 'session start created'
+    session = Session.objects.create(key=key, expires=datetime.now() + timedelta(days=5), user=user)
+    # session = Session(key=key, expires=datetime.now() + timedelta(days=5))
+    # print session
+    # print user
+    # session.user = user
+    # session.save()
     print session
     return session
