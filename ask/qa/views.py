@@ -105,7 +105,7 @@ def signup(request):
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             if session is not None:
                 response = HttpResponseRedirect('/')
-                response.set_cookie('sessid', session.key, httponly=True,
+                response.set_cookie('sessionid', session.key, httponly=True,
                                 expires=session.expires
                                 )
                 return response
@@ -125,7 +125,7 @@ def login(request):
             session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             if session is not None:
                 response = HttpResponseRedirect(url)
-                response.set_cookie('sessid', session.key,
+                response.set_cookie('sessionid', session.key,
                                 expires=session.expires
                                 )
                 return response
