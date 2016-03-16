@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-
-
-class User(models.Model):
-    username = models.CharField(unique=True, max_length=255)
-    password = models.CharField(max_length=255)
-    email = models.EmailField()
-
-    def __unicode__(self):
-        return self.username + self.email + self.password
-
-
-class Session(models.Model):
-    key = models.CharField(unique=True, max_length=255)
-    user = models.ForeignKey(User)
-    expires = models.DateTimeField()
-
-    # def __unicode__(self):
-    #     return self.key + '  ' + self.user + ' ' + self.expires
+from django.contrib.auth.models import User
 
 
 # Question - вопрос
@@ -66,3 +49,21 @@ class Answer(models.Model):
     class Meta:
         # db_table = 'blogposts'
         ordering = ['-added_at']
+
+
+class User(models.Model):
+    username = models.CharField(unique=True, max_length=255)
+    password = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    def __unicode__(self):
+        return self.username + self.email + self.password
+
+
+class Session(models.Model):
+    key = models.CharField(unique=True, max_length=255)
+    user = models.ForeignKey(User)
+    expires = models.DateTimeField()
+
+    # def __unicode__(self):
+    #     return self.key + '  ' + self.user + ' ' + self.expires
