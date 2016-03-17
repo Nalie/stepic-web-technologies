@@ -105,7 +105,7 @@ def signup(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 print '1'
-                login(request.POST, user)
+                login(request, user)
                 print '2'
             # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             # if session is not None:
@@ -123,7 +123,7 @@ def signup(request):
     })
 
 
-def login(request):
+def mylogin(request):
     error = ''
     if request.method == 'POST':
         form = LoginForm(request.POST)

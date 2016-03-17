@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', 'qa.views.home'),
-    url(r'^login/', 'qa.views.login'),
+    url(r'^login/', 'qa.views.mylogin'),
     url(r'^signup/', 'qa.views.signup'),
     url(r'^question/(?P<pk>\d+)/$', 'qa.views.question'),
     url(r'^ask/', 'qa.views.ask'),
