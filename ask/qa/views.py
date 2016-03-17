@@ -101,19 +101,20 @@ def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            form.save()
+            u = form.save()
+            print u
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            print user
             if user is not None:
             # the password verified for the user
-                if user.is_active:
-                    login(request, user)
+                login(request, user)
             # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             # if session is not None:
-                    response = HttpResponseRedirect('/')
+                response = HttpResponseRedirect('/')
                 # response.set_cookie('sessionid', session.key, httponly=True,
                 #                 expires=session.expires
                 #                 )
-                    return response
+                return response
     else:
         form = SignupForm()
     return render(request, 'qa/signup.html', {
@@ -130,15 +131,14 @@ def login(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
             # the password verified for the user
-                if user.is_active:
-                    login(request, user)
+                login(request, user)
             # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             # if session is not None:
-                    response = HttpResponseRedirect(url)
+                response = HttpResponseRedirect(url)
                 # response.set_cookie('sessionid', session.key, httponly=True,
                 #                 expires=session.expires
                                 # )
-                    return response
+                return response
             else:
                 error = u'Неверный логин / пароль'
     else:
