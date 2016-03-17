@@ -5,7 +5,7 @@ from django.views.decorators.http import require_GET, require_POST
 from django.core.paginator import Paginator, EmptyPage
 from models import Question
 from forms import AskForm, AnswerForm, SignupForm, LoginForm
-from utils import do_login
+from django.contrib.auth import authenticate, login
 from django.db.models import Count
 
 
@@ -95,7 +95,6 @@ def answer(request):
         'form': form,
     })
 
-from django.contrib.auth import authenticate, login
 
 def signup(request):
     if request.method == 'POST':
@@ -104,17 +103,8 @@ def signup(request):
             form.save()
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
-                print '1'
                 login(request, user)
-                print '2'
-            # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            # if session is not None:
                 response = HttpResponseRedirect('/')
-                print '3'
-                print response
-                # response.set_cookie('sessionid', session.key, httponly=True,
-                #                 expires=session.expires
-                #                 )
                 return response
     else:
         form = SignupForm()
@@ -131,14 +121,8 @@ def mylogin(request):
             url = request.POST.get('continue', '/')
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
-            # the password verified for the user
                 login(request, user)
-            # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
-            # if session is not None:
                 response = HttpResponseRedirect(url)
-                # response.set_cookie('sessionid', session.key, httponly=True,
-                #                 expires=session.expires
-                                # )
                 return response
             else:
                 error = u'Неверный логин / пароль'

@@ -15,7 +15,6 @@ class AskForm(forms.Form):
 
     def get_url(self):
         return '/qa/ask/'
-    # def clean(self):
 
     def save(self):
         question = Question(**self.cleaned_data)
@@ -33,7 +32,6 @@ class AnswerForm(forms.Form):
 
     def get_url(self):
         return '/qa/answer/'
-    # def clean(self):
 
     def save(self):
         answer = Answer(**self.cleaned_data)
@@ -51,15 +49,10 @@ class SignupForm(forms.Form):
         return '/qa/signup/'
 
     def save(self):
-        # from utils import make_password
         user = User.objects.create_user(self.cleaned_data['username'],
                                  self.cleaned_data['email'],
                                  self.cleaned_data['password']
-                                 # make_password(self.cleaned_data['username'])
                                  )
-        # user = User(**self.cleaned_data)
-        # user.password = make_password(user.password)
-        # user.save()
         return user
 
 
