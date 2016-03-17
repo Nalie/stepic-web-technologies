@@ -101,16 +101,17 @@ def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            u = form.save()
-            print u
+            form.save()
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            print user
             if user is not None:
-            # the password verified for the user
+                print '1'
                 login(request, user)
+                print '2'
             # session = do_login(form.cleaned_data['username'], form.cleaned_data['password'])
             # if session is not None:
                 response = HttpResponseRedirect('/')
+                print '3'
+                print response
                 # response.set_cookie('sessionid', session.key, httponly=True,
                 #                 expires=session.expires
                 #                 )
